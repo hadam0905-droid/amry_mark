@@ -10,7 +10,22 @@ st.set_page_config(
 )
 
 # 계급장 원본 사진 불러오기
-image = Image.open("2015010609533000000024079.jpg")
+import streamlit as st
+import random
+from PIL import Image
+from pathlib import Path
+
+# 현재 파이썬 파일이 있는 폴더 확인
+BASE_DIR = Path(__file__).resolve().parent
+
+# 계급장 사진 불러오기
+IMAGE_PATH = BASE_DIR / "2015010609533000000024079.jpg"
+
+if not IMAGE_PATH.exists():
+    st.error("계급장 사진 파일을 찾을 수 없습니다.")
+    st.stop()
+
+image = Image.open(IMAGE_PATH)
 
 # 대한민국 육군 계급장 리스트
 # 사진의 한국군 부분을 계급별로 잘라서 사용
